@@ -10,40 +10,49 @@ import arduinoMeasurement.mockup.SingleProbeMockup;
 
 public class ProbesSerie
 {
-	private final String title;
-	private List<Probe> probes;
+	private final String seriesName;
+	private SortedList<Probe> probes;
+	private Probe lastInsertedProbe;
 	
 	public ProbesSerie(final String title)
 	{
-		this.title = title;
+		this.seriesName = title;
 		probes = new SortedList<>();
+		lastInsertedProbe = null;
 	}
 
 	public String getTitle()
 	{
-		return title;
+		return seriesName;
 	}	
 	
 	void addProbe(final float value)
 	{
-		probes.add(new Probe(value));
+		Probe probe = new Probe(value);
+		lastInsertedProbe = probe;
+		probes.add(probe);
 	}
 	
 	void addProbe(final float value, final Date date)
 	{
-		probes.add(new Probe(value, date));
+		Probe probe = new Probe(value, date);
+		lastInsertedProbe = probe;
+		probes.add(probe);
 	}
 	
-	public SingleProbeMockup buildMockup()
+	public SingleProbeMockup buildLastProbeMockup() throws NoLastProbeExeption
 	{
-		//TODO
-		return null;
+		if(lastInsertedProbe != null)
+		{
+			return new SingleProbeMockup(lastInsertedProbe, seriesName);
+		}
+		throw new NoLastProbeExeption();
 	}
 	
 	public static ProbesSerie newInstance(final ProbesSerie another)
 	{
 		final ProbesSerie newInstanceOfMeasurementSerie = new ProbesSerie(another.getTitle());
-		newInstanceOfMeasurementSerie.probes = Collections.unmodifiableList(another.probes);
+		newInstanceOfMeasurementSerie.probes = (SortedList<Probe>) Collections.unmodifiableList(another.probes);
 		return newInstanceOfMeasurementSerie;
 	}
 

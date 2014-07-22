@@ -5,6 +5,7 @@
 	<classpathentry kind="lib" path="/home/ferene/Pobrane/jfreechart-1.0.16/lib/jfreechart-1.0.16.jar"/>
 	<classpathentry kind="lib" path="/home/ferene/Pobrane/jfreechart-1.0.16/lib/jfreechart-1.0.16-swt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jFreeChart"/>
-	<classpathentry kind="lib" path="/home/ferene/Eclipse/workspace/ArduinoMeasurement/ArduinoMeasurement/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="/home/ferene/git/arduinoMeasurement/arduinoMeasurement/ArduinoMeasurement/ArduinoMeasurement/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="/home/ferene/Pobrane/jSSC-2.6.0-Release/jssc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

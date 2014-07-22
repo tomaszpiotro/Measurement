@@ -50,14 +50,9 @@ public class Probe implements Comparable<Probe>
 		return date;
 	}
 	
-	private Probe newInstance(final Probe another)
+	Probe newInstance(final Probe another)
 	{
 		return new Probe(value, date);
-	}
-	
-	SingleProbeMockup buildMockup()
-	{
-		return new SingleProbeMockup(newInstance(this));
 	}
 
 }
