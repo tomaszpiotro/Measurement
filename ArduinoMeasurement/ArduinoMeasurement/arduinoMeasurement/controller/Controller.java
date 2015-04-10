@@ -69,7 +69,10 @@ public class Controller
 		@Override
 		public void react(final ControllerEvent event)
 		{
-			view.setSerialPortsNames(transmission.getPossibleConnections());
+			if(transmission != null)
+			{
+				view.setSerialPortsNames(transmission.getPossibleConnections());
+			}
 		}	
 	}
 	
@@ -110,6 +113,10 @@ public class Controller
 			{
 				if(!model.BuildSettingsMockup().isWireless())
 				{
+					if(transmission != null)
+					{
+						transmission.closeConnection();
+					}
 					transmission = new SerialTransmission(queue);
 					transmission.connect();
 					view.setConnected(true);
@@ -117,6 +124,7 @@ public class Controller
 			} 
 			catch (ConnectionErrorException e)
 			{
+				System.out.println(e);
 				view.setConnected(false);
 			}
 		}
