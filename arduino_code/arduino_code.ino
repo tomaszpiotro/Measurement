@@ -19,7 +19,7 @@ void setup()
 void loop()  
 { 
   printTemp();
-  delay(50);
+  delay(500);
   printDHT();
   delay(500);                 
 }
