@@ -47,7 +47,7 @@ void printDHT()
 
   Serial.print("Humidity:"); 
   Serial.println(h);
-  Serial.print("Temperature (DHT):"); 
+  Serial.print("Temperatureeee:");
   Serial.println(t);
 }
 
