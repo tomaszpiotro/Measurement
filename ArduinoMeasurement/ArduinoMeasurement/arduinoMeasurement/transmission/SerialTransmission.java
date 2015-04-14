@@ -105,9 +105,6 @@ public class SerialTransmission implements Transmission
                 {//If line is OFF
                     queue.add(new DisconnectEvent());
                 }
-                else 
-                {
-                }
             }
         }
     }
