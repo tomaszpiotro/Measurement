@@ -16,7 +16,7 @@ public class ConnectionSettings
 	public ConnectionSettings()
 	{
 		wireless = false;
-		baudRate = BaudRate.b57600;
+		baudRate = BaudRate.b9600;
 		dataBits = DataBits.b8;
 		stopBits = StopBits.s0;
 		parity = false;
