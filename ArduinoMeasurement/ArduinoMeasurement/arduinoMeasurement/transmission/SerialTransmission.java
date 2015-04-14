@@ -124,7 +124,7 @@ public class SerialTransmission implements Transmission
 		} 
 		catch (SerialPortException e)
 		{
-			e.printStackTrace();
+            System.out.println("error - port not opened");
 		}
 	}
 }
