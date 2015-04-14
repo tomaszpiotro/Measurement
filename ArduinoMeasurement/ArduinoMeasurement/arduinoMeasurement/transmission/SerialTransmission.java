@@ -1,7 +1,11 @@
 package arduinoMeasurement.transmission;
 
+import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import com.sun.deploy.util.StringUtils;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -63,8 +67,9 @@ public class SerialTransmission implements Transmission
 
 	private class SerialPortReader implements SerialPortEventListener 
 	{
-		private byte buffer[];
-		String string = new String();
+        private byte buffer[];
+        private Pattern pattern = Pattern.compile("[\\w]:\\d+.\\d+");
+        String string = new String();
         public void serialEvent(SerialPortEvent event) 
         {
             if(event.isRXCHAR())
@@ -77,10 +82,26 @@ public class SerialTransmission implements Transmission
                     {
                         buffer = serialPort.readBytes(liczba);
                         string += new String(buffer);
-                        if(string.contains("\n"))
+                        Matcher m = pattern.matcher(string);
+                        System.out.println("################################");
+                        System.out.println(string);
+                        System.out.println("################################");
+                        if(m.find())
                         {
-                        	queue.add(new NewProbeEvent(string));
-                        	string = new String();
+                            System.out.println("-------------------FOUND------------------------");
+                            System.out.println(string);
+                            String[] parts;
+                            parts = string.split("\\n");
+                            if(parts.length > 1)
+                            {
+                                String[] list = Arrays.copyOfRange(parts, 1, parts.length);
+                                string = StringUtils.join(Arrays.asList(list), "\n");
+                            }
+                            else
+                            {
+                                string = new String();
+                            }
+                            queue.add(new NewProbeEvent(parts[0]));
                         }
                     }
                     catch (SerialPortException ex) 
