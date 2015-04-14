@@ -11,7 +11,7 @@ int tempIn = 0;
 void setup()  
 { 
   analogReference(DEFAULT);
-  Serial.begin(57600);
+  Serial.begin(9600);
   dht.begin();
 
 } 
