@@ -18,6 +18,7 @@ import arduinoMeasurement.model.Model;
 import arduinoMeasurement.model.NoLastProbeExeption;
 import arduinoMeasurement.transmission.ConnectionErrorException;
 import arduinoMeasurement.transmission.SerialTransmission;
+import arduinoMeasurement.transmission.SerialTransmission2;
 import arduinoMeasurement.transmission.Transmission;
 import arduinoMeasurement.view.View;
 
