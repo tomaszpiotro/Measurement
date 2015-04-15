@@ -48,7 +48,7 @@ public class SerialTransmission implements Transmission
 				int mask = SerialPort.MASK_RXCHAR + SerialPort.MASK_CTS + SerialPort.MASK_DSR;//Prepare mask
 	            serialPort.setEventsMask(mask);//Set mask
 	            serialPort.addEventListener(new SerialPortReader());//Add SerialPortEventListener
-			} 
+			}
 			catch (SerialPortException e) 
 			{
 				throw new ConnectionErrorException();
@@ -74,14 +74,17 @@ public class SerialTransmission implements Transmission
         {
             if(event.isRXCHAR())
             {//If data is available
+                System.out.println("isRXCHAR");
                 int liczba = event.getEventValue();
 
                 {//Check bytes count in the input buffer
-                    //Read data, if 10 bytes available 
-                    try 
+                    //Read data, if 10 bytes available
+                    try
                     {
-                        buffer = serialPort.readBytes(liczba);
-                        string += new String(buffer);
+                        System.out.println("TRY");
+//                        buffer = serialPort.readString(liczba);
+//                        string += new String(buffer);
+                        string += serialPort.readString(liczba);
                         Matcher m = pattern.matcher(string);
                         System.out.println("################################");
                         System.out.println(string);

@@ -125,6 +125,7 @@ public class Controller
 			catch (ConnectionErrorException e)
 			{
 				System.out.println(e);
+				System.out.println("Connection refused");
 				view.setConnected(false);
 			}
 		}
