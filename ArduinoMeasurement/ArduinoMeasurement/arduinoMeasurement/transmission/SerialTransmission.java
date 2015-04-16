@@ -5,7 +5,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -39,12 +40,15 @@ public class SerialTransmission implements Transmission
 	{
 		try
 		{
-			serialPort = new SerialPort(SerialPortList.getPortNames()[0]);
-			try 
+            System.out.println(SerialPortList.getPortNames()[0]);
+            serialPort = new SerialPort(SerialPortList.getPortNames()[0]);
+            System.out.println("-----------------");
+            try
 			{
-				serialPort.openPort();
+                serialPort.openPort();
+                System.out.println("asdasdasd");
 				serialPort.setParams(connectionSettings.getBaudRate().getValue(), connectionSettings.getDataBits().getBits(),
-						connectionSettings.getStopBits().getStopBits(), connectionSettings.isParity()?1:0);
+                        connectionSettings.getStopBits().getStopBits(), connectionSettings.isParity() ? 1 : 0);
 				int mask = SerialPort.MASK_RXCHAR + SerialPort.MASK_CTS + SerialPort.MASK_DSR;//Prepare mask
 	            serialPort.setEventsMask(mask);//Set mask
 	            serialPort.addEventListener(new SerialPortReader());//Add SerialPortEventListener
@@ -144,8 +148,11 @@ public class SerialTransmission implements Transmission
 	{
 		try
 		{
-			serialPort.closePort();
-		} 
+            if(serialPort != null)
+            {
+                serialPort.closePort();
+            }
+		}
 		catch (SerialPortException e)
 		{
             System.out.println("error - port not opened");
