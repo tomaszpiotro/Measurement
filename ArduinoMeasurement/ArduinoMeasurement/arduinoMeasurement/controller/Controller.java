@@ -147,7 +147,7 @@ public class Controller
 					view.addSingleProbe(singleProbeMockup);
 				}
 				catch(NoLastProbeExeption e){}
-				view.addNewLogMessage(probeEvent.getData());
+//				view.addNewLogMessage(probeEvent.getData());
 			}
 			catch(NumberFormatException | ArrayIndexOutOfBoundsException e)
 			{
