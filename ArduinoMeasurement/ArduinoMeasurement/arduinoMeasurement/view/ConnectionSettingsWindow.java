@@ -25,8 +25,9 @@ public class ConnectionSettingsWindow extends JFrame
 	private final BlockingQueue<ControllerEvent> queue;
 	private final static String windowName = "Connection settings";
 
-	private final JComboBox<String> serialPorts;
-	private final JLabel baudRateLabel;
+    private final JLabel serialPortsLabel;
+    private final JComboBox<String> serialPorts;
+    private final JLabel baudRateLabel;
 	private final JComboBox<BaudRate> baudRates;
 	private final JLabel dataBitsLabel;
 	private final JComboBox<DataBits> dataBits;
@@ -45,6 +46,9 @@ public class ConnectionSettingsWindow extends JFrame
 		setVisible(false);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setVisible(false);
+
+        this.serialPortsLabel = new JLabel("Serial ports:");
+        add(serialPortsLabel);
 
 		this.serialPorts = new JComboBox<>();
 		add(serialPorts, "wrap");
