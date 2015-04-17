@@ -39,13 +39,10 @@ public class SerialTransmission implements Transmission
 	{
 		try
 		{
-            System.out.println(SerialPortList.getPortNames()[0]);
             serialPort = new SerialPort(SerialPortList.getPortNames()[0]);
-            System.out.println("-----------------");
             try
 			{
                 serialPort.openPort();
-                System.out.println("asdasdasd");
 				serialPort.setParams(connectionSettings.getBaudRate().getValue(), connectionSettings.getDataBits().getBits(),
                         connectionSettings.getStopBits().getStopBits(), connectionSettings.isParity() ? 1 : 0);
 				int mask = SerialPort.MASK_RXCHAR + SerialPort.MASK_CTS + SerialPort.MASK_DSR;//Prepare mask
