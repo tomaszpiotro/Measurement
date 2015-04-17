@@ -68,28 +68,30 @@ public class SerialTransmission implements Transmission
 	private class SerialPortReader implements SerialPortEventListener 
 	{
         private Pattern pattern = Pattern.compile("[\\w]:\\d+.\\d+");
-        String string = new String();
+        String string = "";
+        int counter = 0;
+
         public void serialEvent(SerialPortEvent event) 
         {
             if(event.isRXCHAR())
             {//If data is available
-                System.out.println("isRXCHAR");
-                int liczba = event.getEventValue();
+                int length = event.getEventValue();
 
                 {//Check bytes count in the input buffer
                     //Read data, if 10 bytes available
                     try
                     {
-                        System.out.println("TRY");
-//                        buffer = serialPort.readString(liczba);
-//                        string += new String(buffer);
-                        string += serialPort.readString(liczba);
+                        string += serialPort.readString(length);
                         Matcher m = pattern.matcher(string);
-                        System.out.println("################################");
                         System.out.println(string);
-                        System.out.println("################################");
-                        if(m.find())
+                        if(m.find() && string.contains("\n"))
                         {
+                            if(counter == 0)
+                            {
+                                counter++;
+                                string = "";
+                                return;
+                            }
                             System.out.println("-------------------FOUND------------------------");
                             System.out.println(string);
                             String[] parts;
@@ -101,7 +103,7 @@ public class SerialTransmission implements Transmission
                             }
                             else
                             {
-                                string = new String();
+                                string = "";
                             }
                             queue.add(new NewProbeEvent(parts[0]));
                         }
