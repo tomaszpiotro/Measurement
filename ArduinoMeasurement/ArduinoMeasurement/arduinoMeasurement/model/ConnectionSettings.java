@@ -7,7 +7,6 @@ import arduinoMeasurement.transmission.StopBits;
 
 public class ConnectionSettings
 {
-	private boolean wireless;
 	private BaudRate baudRate;
 	private DataBits dataBits;
 	private StopBits stopBits;
@@ -15,18 +14,13 @@ public class ConnectionSettings
 	
 	public ConnectionSettings()
 	{
-		wireless = false;
 		baudRate = BaudRate.b9600;
 		dataBits = DataBits.b8;
 		stopBits = StopBits.s0;
 		parity = false;
 	}
 	
-	void setWireless(final boolean wireless)
-	{
-		this.wireless = wireless;
-	}
-	
+
 	void setBaudRate(final BaudRate baudRate)
 	{
 		this.baudRate = baudRate;
@@ -62,11 +56,7 @@ public class ConnectionSettings
 		return stopBits;
 	}
 	
-	public boolean isWireless()
-	{
-		return wireless;
-	}
-	
+
 	public boolean isParity()
 	{
 		return parity;
@@ -74,12 +64,11 @@ public class ConnectionSettings
 	
 	public SettingsMockup buildMockup()
 	{
-		return new SettingsMockup(wireless, baudRate, dataBits, stopBits, parity);
+		return new SettingsMockup(baudRate, dataBits, stopBits, parity);
 	}
 	
 	public void setSettings(final SettingsMockup settingsMockup)
 	{
-		wireless = settingsMockup.isWireless();
 		baudRate = settingsMockup.getBaudRate();
 		dataBits = settingsMockup.getDataBits();
 		stopBits = settingsMockup.getStopBits();

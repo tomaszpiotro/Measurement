@@ -24,8 +24,7 @@ public class ConnectionSettingsWindow extends JFrame
 	private static final long serialVersionUID = -1310225923045954845L;
 	private final BlockingQueue<ControllerEvent> queue;
 	private final static String windowName = "Connection settings";
-	
-	private final JRadioButton wirelessRadioButton;
+
 	private final JComboBox<String> serialPorts;
 	private final JLabel baudRateLabel;
 	private final JComboBox<BaudRate> baudRates;
@@ -46,18 +45,7 @@ public class ConnectionSettingsWindow extends JFrame
 		setVisible(false);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setVisible(false);
-		
-		this.wirelessRadioButton = new JRadioButton("Wireless");
-		add(wirelessRadioButton);
-		this.wirelessRadioButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent arg0)
-			{
-				setWireless(wirelessRadioButton.isSelected());
-			}
-		});
-		
+
 		this.serialPorts = new JComboBox<>();
 		add(serialPorts, "wrap");
 		
@@ -101,7 +89,7 @@ public class ConnectionSettingsWindow extends JFrame
 	
 	private SettingsMockup buildSettingsMockup()
 	{
-		SettingsMockup mockup = new SettingsMockup(wirelessRadioButton.isSelected(), 
+		SettingsMockup mockup = new SettingsMockup(
 				(BaudRate)baudRates.getSelectedItem(), (DataBits)dataBits.getSelectedItem(), 
 				(StopBits)stopBits.getSelectedItem(), parityRadioButton.isSelected());
 		return mockup;
@@ -112,17 +100,10 @@ public class ConnectionSettingsWindow extends JFrame
 		baudRates.setSelectedItem(settingsMockup.getBaudRate());
 		dataBits.setSelectedItem(settingsMockup.getDataBits());
 		stopBits.setSelectedItem(settingsMockup.getStopBits());
-		wirelessRadioButton.setSelected(settingsMockup.isWireless());
 		parityRadioButton.setSelected(settingsMockup.isParity());
 		
-		setWireless(settingsMockup.isWireless());
 		this.pack();
 		setVisible(true);
-	}
-	
-	private void setWireless(final boolean wireless)
-	{
-		serialPorts.setVisible(!wireless);
 	}
 	
 	public void setSerialPortsNames(final String[] serialPortNames)

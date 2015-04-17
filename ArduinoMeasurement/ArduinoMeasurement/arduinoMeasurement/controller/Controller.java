@@ -112,17 +112,14 @@ public class Controller
 		{
 			try
 			{
-				if(!model.BuildSettingsMockup().isWireless())
-				{
-					if(transmission != null)
-					{
-						transmission.closeConnection();
-					}
-					transmission = new SerialTransmission(queue);
-					transmission.connect();
-					view.setConnected(true);
-				}
-			} 
+                if(transmission != null)
+                {
+                    transmission.closeConnection();
+                }
+                transmission = new SerialTransmission(queue);
+                transmission.connect();
+                view.setConnected(true);
+			}
 			catch (ConnectionErrorException e)
 			{
 				System.out.println(e);
