@@ -116,10 +116,7 @@ public class SerialTransmission implements Transmission
             }
             else if(event.isCTS())
             {//If CTS line has changed state
-                if(event.getEventValue() == 1)
-                {//If line is ON
-                }
-                else 
+                if(event.getEventValue() != 1)
                 {
                 	queue.add(new DisconnectEvent());
                 }
