@@ -67,7 +67,6 @@ public class SerialTransmission implements Transmission
 
 	private class SerialPortReader implements SerialPortEventListener 
 	{
-        private byte buffer[];
         private Pattern pattern = Pattern.compile("[\\w]:\\d+.\\d+");
         String string = new String();
         public void serialEvent(SerialPortEvent event) 
